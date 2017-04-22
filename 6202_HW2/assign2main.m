@@ -1,4 +1,5 @@
-clear all;close all;clc;
+close all;clc;
+
 
 % generate Sin wave
 [t_sin,x_sin] = generateSinusoidal(1,44100,400,0.5,pi/2);
@@ -74,3 +75,16 @@ subplot(1,2,1);
 spectrogram(x_square,rectwin(2048),1024,2048,1e3,'yaxis');
 subplot(1,2,2);
 spectrogram(x_square,hann(2048),1024,2048,1e3,'yaxis');
+
+% [t,x] = generateSinusoidal(1,44100,400,0.5,pi/2);
+% plot(t,x);
+% axis([0 0.005 -1 1]);
+[t,x] = generateSquare(1,44100,400,0.5,0);
+% plot(t,x);
+% axis([0 0.005 -1 1]);
+
+[f,XAbs,XPhase,XRe,XIm] = computeSpectrum(x,44100);
+plot(f,XAbs);
+
+plot(f,XPhase);
+
