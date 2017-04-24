@@ -11,8 +11,7 @@ hold off
 axis tight
 legend('sin','rms','peak');
 figure;
-% 
-% x_song = audioread('sv44_short.wav');
+
 x_song = audioread('sv44_short.wav');
 plot(x_song);
 title('song track with static curve');
