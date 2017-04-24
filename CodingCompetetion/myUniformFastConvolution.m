@@ -1,4 +1,4 @@
-function y = myFastConvolution(x, h)
+function y = myUniformFastConvolution(x, h)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 filter_size = length(h);
