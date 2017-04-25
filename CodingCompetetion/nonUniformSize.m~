@@ -4,7 +4,6 @@ function [y,h_array] = nonUniformSize(h,sig_block_size)
 filter_size = length(h);
 sum = 0;
 count = 1;
-
 while sum<filter_size
     filter_block_size = 128 * 2 ^ floor((count-1)/2);
     count = count +1;
@@ -12,9 +11,8 @@ while sum<filter_size
 %     disp(filter_block_size);
 end
 y = sum;
-h = [h;zeros(sum-filter_size,1)];
 sum = 1;
-h_array = cell(count-1,1);
+h_array = cell(count,1);
 count = 1;
 while sum<filter_size
     filter_block_size = 128 * 2 ^ floor((count-1)/2);
