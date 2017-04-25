@@ -3,9 +3,11 @@ function y = myUniformFastConvolution(x, h)
 %   Detailed explanation goes here
 filter_size = length(h);
 block_size = 128;
+sig_length = length(x);
+x = [x;zeros(block_size,1)];
 y = zeros(length(x)+filter_size-1,1);
 
-for i = 1:block_size:length(x)
+for i = 1:block_size:sig_length
     block_x = x(i:i+block_size-1);
     fft_x = fft(block_x,2*block_size-1);
     for j = 1:block_size:filter_size
