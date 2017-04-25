@@ -15,27 +15,25 @@ for i = 1:sig_block_size:sig_length
     pre_fft_x = 0;%pre allocate result of reusing fft_x
     %loop through partioned h
     while filter_index < filter_size
-        filter_block_size = 128 * 2 ^ floor((count-1)/2);%calculating the size of partitioned h, h should partitioned in 128,128,256,256,512,512....etc.
+        filter_block_size = 128 * 2 ^ floor((count-1)/2);%calculating the size of partitioned h, h should partitioned in 128,128,256,256,512,512....etc
         count = count +1;
-        %store the fft x if length partitioned h is the same
         if mod(count,2) == 0
             fft_x = fft(block_x,sig_block_size+filter_block_size-1);
             pre_fft_x = fft_x;
         else
             fft_x = pre_fft_x;
         end
+        fft_h = cell2mat(h_array(count-1));
         
-        fft_h = cell2mat(h_array(count-1));%convert cell to mattrix
+        conv_block = ifft(fft_x .* fft_h);
         
-        conv_block = ifft(fft_x .* fft_h);%calculate convolution result
+%         tmp = ;
+        y(i+filter_index-1:i+filter_index+sig_block_size+filter_block_size-3) = y(i+filter_index-1:i+filter_index+sig_block_size+filter_block_size-3)+conv_block;
         
-        y(i+filter_index-1:i+filter_index+sig_block_size+filter_block_size-3) = y(i+filter_index-1:i+filter_index+sig_block_size+filter_block_size-3)+conv_block;%overlap and add
-        
-        filter_index= filter_index + filter_block_size;%update filter index
+        filter_index= filter_index + filter_block_size;
     end
 end
-
-y = y(1:sig_length+filter_size-1);%remove extra padded zero
+y = y(1:sig_length+filter_size-1);
 
 end
 
