@@ -1,4 +1,4 @@
-function y = myNonUniformFastConvolution(x, h)
+function y = myFastConvolution(x, h)
 sig_block_size = 128;
 sig_length = length(x);
 filter_size = length(h);
