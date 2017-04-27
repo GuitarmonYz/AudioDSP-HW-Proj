@@ -1,5 +1,5 @@
-x = audioread('sv_mono_19sec.wav');
-h = audioread('impulse-response.wav');
+x = audioread('piano.wav');
+h = audioread('piano.wav');
 
 % tic;
 % myUniformFastConvolution(x,h);
@@ -8,7 +8,7 @@ h = audioread('impulse-response.wav');
 % conv(x,h);
 % disp(toc);
 tic;
-plot(conv(x,h)-myNonUniformFastConvolution(x,h));
+myFastConvolution(x,h);
 disp(toc);
 % tic;
 % m = length(x)+length(h)-1;
